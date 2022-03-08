@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:news_api_app/controller/get_api.dart';
+import 'package:news_api_app/controller/get_data.dart';
 import 'package:news_api_app/repository/time_box.dart';
 import 'package:news_api_app/view/animation/move.dart';
 import 'package:news_api_app/view/widget/fetched_listview.dart';
@@ -93,36 +93,7 @@ class HomeScreen extends HookWidget {
                       color: pPink,
                     ),
                     onPressed: (() async {
-                      // final Article a = Article(
-                      //     auther: 'a',
-                      //     description: 'des',
-                      //     id: 'test',
-                      //     publishedAt: DateTime.now(),
-                      //     imgUrl: '',
-                      //     title: '',
-                      //     url: '');
-
-                      // ArticleBox.addAll([a]);
-
-                      // final lis = ArticleBox.getAll();
-                      // print(lis.length);
-
-                      // ArticleBox.deleteFromId('test');
-
-                      final List<Map<String, dynamic>> data =
-                          await GetApi.getData();
-                      final List<Article> articleList = Article.fromList(data);
-
-                      print(articleList[0].title);
-                      print(articleList);
-
-                      ArticleBox.updateNew(articleList);
-
-                      // ArticleBox.addAll(articleList);
-                      TimeBox.update(DateTime.now());
-
-                      print(TimeBox.date);
-                      print(ArticleBox.getAll()[1].title);
+                      await GetData.update(context);
                     }),
                   ),
                 ],
